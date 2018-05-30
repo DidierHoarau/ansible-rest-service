@@ -1,0 +1,4 @@
+---
+
+- name: Docker Clean Up
+  shell: docker system prune -f

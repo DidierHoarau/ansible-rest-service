@@ -1,0 +1,17 @@
+---
+
+- name: APT Update
+  apt:
+    update_cache: yes
+
+- name: APT Upgrade
+  apt:
+    upgrade: yes
+
+- name: APT Auto Clean
+  apt:
+    autoclean: yes
+
+- name: APT Auto Remove
+  apt:
+    autoremove: yes

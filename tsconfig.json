@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist-api",
+    "allowJs": true
+  },
+  "include": ["src-api/**/*"],
+  "exclude": ["node_modules", "coverage", "test", "dist"]
+}

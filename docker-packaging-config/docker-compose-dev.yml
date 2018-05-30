@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  server:
+    build: .
+    image: ${DOCKER_REGISTRY}/ansible_server
+    environment:
+      ANSIBLE_HOST_KEY_CHECKING: "False"
+    ports:
+      - 80
+    volumes:
+      - ../src-playbooks:/opt/ansible/playbooks
+      - ../src-api:/opt/app-api/src-api
+      - ../tsconfig.json:/opt/app-api/tsconfig.json
+      - ../package.json:/opt/app-api/package.json
+      - ../package-lock.json:/opt/app-api/package-lock.json
+      - ./start-cmd-dev.sh:/start-cmd.sh
+    hostname: ansible
+    networks:
+      automation-network:
+        aliases:
+          - ansible
+
+networks:
+  automation-network:
+    external: true

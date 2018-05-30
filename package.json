@@ -1,0 +1,66 @@
+{
+  "name": "ansible-rest-service",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "packaging:init":
+      "chmod +x docker-packaging-config/*.sh && docker-packaging-config/init.sh",
+    "//": "-------------------------------------------------------------------",
+    "packaging:prepare": "docker-packaging/prepare.sh",
+    "packaging:image-build": "docker-packaging/image-build.sh",
+    "packaging:image-push": "docker-packaging/image-push.sh",
+    "packaging:service-deploy": "docker-packaging/service-deploy.sh",
+    "packaging:service-run": "docker-packaging/service-run.sh",
+    "///": "------------------------------------------------------------------",
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json ./src-api/**/*.ts || exit 1",
+    "dev":
+      "NODE_ENV=dev concurrently --kill-others \"tsc -w\" \"nodemon dist-api/app.js\"",
+    "dev:docker": "docker-packaging-config/start-dev-docker.sh || true",
+    "////": "-----------------------------------------------------------------"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.14.0",
+    "fs-extra": "^6.0.1",
+    "lodash": "^4.17.5",
+    "request": "^2.87.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.11.1",
+    "@types/fs-extra": "^5.0.1",
+    "@types/jest": "^22.1.4",
+    "@types/lodash": "^4.14.109",
+    "@types/node": "^10.1.4",
+    "@types/request": "^2.47.0",
+    "@types/sinon": "^5.0.1",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.18.2",
+    "jest": "^23.0.1",
+    "nodemon": "^1.17.5",
+    "npm-watch": "^0.3.0",
+    "sinon": "^5.0.10",
+    "ts-jest": "^22.4.6",
+    "ts-node": "^6.0.5",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2"
+  },
+  "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "src-api/.*.spec.ts",
+    "collectCoverageFrom": ["src-api/**/*.{ts}"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      }
+    }
+  }
+}
